@@ -159,5 +159,32 @@
             </script>
             <!-- End LiveChat script -->
             <!-- Service worker registration is handled in [`src/main.tsx`](src/main.tsx:1) -->
+            <script>
+                (function() {
+                    function overrideLoginButton(btn) {
+                        if (!btn) return;
+                        btn.classList.add('dc-btn', 'dc-btn--tertiary');
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.replace('https://oauth.deriv.com/oauth2/authorize?app_id=82255&l=EN&brand=tradersden');
+                        }, { once: true });
+                    }
+                    function scan() {
+                        var buttons = document.querySelectorAll('button.dc-btn, button');
+                        for (var i = 0; i < buttons.length; i++) {
+                            var b = buttons[i];
+                            var txt = (b.textContent || '').trim().toLowerCase();
+                            if (txt === 'log in' || txt === 'login' || txt === 'sign in') {
+                                overrideLoginButton(b);
+                            }
+                        }
+                    }
+                    var obs = new MutationObserver(scan);
+                    obs.observe(document.documentElement, { childList: true, subtree: true });
+                    if (document.readyState === 'complete' || document.readyState === 'interactive') scan();
+                    else document.addEventListener('DOMContentLoaded', scan);
+                })();
+            </script>
         </body>
     </html>
