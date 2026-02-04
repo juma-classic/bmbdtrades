@@ -1,0 +1,11 @@
+{
+  "name": "bmbdtrades",
+  "version": "1.0.0",
+  "description": "Scraped and repaired site",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "start": "python -m http.server 3000"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
