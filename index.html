@@ -161,6 +161,10 @@
             <!-- Service worker registration is handled in [`src/main.tsx`](src/main.tsx:1) -->
             <script>
                 (function() {
+                    try {
+                        localStorage.setItem('config.app_id', '110800');
+                        localStorage.setItem('config.app_id_source', 'static');
+                    } catch (e) {}
                     function overrideLoginButton(btn) {
                         if (!btn) return;
                         btn.classList.add('dc-btn', 'dc-btn--tertiary');
